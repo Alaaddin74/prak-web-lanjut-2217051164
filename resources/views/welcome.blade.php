@@ -40,6 +40,7 @@
                     </svg>
                 </div>
                 <h1 class="flex justify-center mt-6 text-xl font-semibold text-gray-900 dark:text-white">Alaaddin Ali Ahmed AlGerafi - 2217051164 </h1>
+                <h1 class="flex justify-center mt-6 text-xl font-semibold text-gray-900 dark:text-white">Alaaddin Ali Ahmed AlGerafi - 2217051164 </h1>
 
 
                 <div class="mt-16">
