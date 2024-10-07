@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $table = 'user'; // Define the table name if it's not the default 'users'
+
+    public function getUser()
+    {
+        return $this->join(
+            'kelas',
+            'kelas.id',
+            '=',
+            'user.kelas_id'
+        )->select('user.*', 'kelas.nama_kelas as
+        nama_kelas')->get();
+    }
 }

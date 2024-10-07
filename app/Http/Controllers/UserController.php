@@ -9,7 +9,16 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
+    public $userModel;
+    public $kelasModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+        $this->kelasModel = new Kelas();
+    }
+
+    // Display the profile
     public function profile($nama = "", $kelas = "", $npm = "")
     {
         $data = [
@@ -17,38 +26,66 @@ class UserController extends Controller
             'kelas' => $kelas,
             'npm' => $npm
         ];
+
         return view('profile', $data);
     }
+
+    // Create method
     public function create()
     {
-        return view('create_user',[
-            'kelas'=> Kelas::all(),
-        ]);
+        // Access the kelasModel property using $this
+        $kelas = $this->kelasModel->getKelas();
+
+        $data = [
+            'title' => 'Create User',
+            'kelas' => $kelas,
+        ];
+
+        return view('create_user', $data);
     }
 
-    public function store(userRequest $request)
+    // Store method to save user data
+    public function store(Request $request)
     {
-        // $data = $request->all();
-        // $data = [
-        //     'nama' => $request->input('nama'),
-        //     'kelas' => $request->input('kelas'),
-        //     'npm' => $request->input('npm'),
-        //     ];
+        // Validate the request data before saving
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'npm' => 'required|string|max:255',
             'kelas_id' => 'required|exists:kelas,id',
         ]);
-            $user = UserModel::create($validatedData);
 
-            $user-> load('kelas');
-
-
-            return view('profile', [
-                'nama' => $user->nama,
-            'npm' => $user->npm,
-            'nama_kelas' => $user->kelas->nama_kelas ?? 'kelas tidak ditemukan',
+        $this->userModel->create([
+            'nama' => $request->input('nama'),
+            'npm' => $request->input('npm'),
+            'kelas_id' => $request->input('kelas_id'),
             ]);
 
+        // Create the new user record
+        // $this->userModel->create([
+        //     'nama' => $validatedData['nama'],
+        //     'npm' => $validatedData['npm'],
+        //     'kelas_id' => $validatedData['kelas_id'],
+        // ]);
+
+        // Redirect to the list of users after saving
+        return redirect()->to('/users');
+    }
+
+    public function index()
+    {
+        // $kelas = Kelas::find(1);
+        // $user = $kelas->user();
+
+        // dd($user);
+
+        // Fetch all users with their class information
+        $users = $this->userModel->getUser();
+        $data = [
+            'title' => 'Create User',
+            'kelas' => $this->userModel->getUser(), // Fetch the user list with class data
+        ];
+        return view('list_user', $data);
+
+        return view('list_user', ['users' => $users]);
     }
 }
