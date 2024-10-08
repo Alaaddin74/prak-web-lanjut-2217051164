@@ -15,10 +15,10 @@ asset('assets/css/style.css') }}">
         <div class="flex flex-col items-center justify-center space-y-6 mt-11 rounded-lg shadow-xl p-20">
             <img class="w-32 h-32 object-fill border-2 p-2 border-cyan-400 rounded-full shadow-2xl" src="{{asset('/images/photoProfile.jpg')}}" alt="photo profile">
             <div class="flex flex-col space-y-3 text-center capitalize">
-                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">name: {{$nama}}</h2>
+                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">name: {{$user->nama}}</h2>
 
-                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">NPM: {{$npm}}</h2>
-                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">kelas: {{$nama_kelas??'kelas tidak ditemukan'}}</h2>
+                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">NPM: {{$user->npm}}</h2>
+                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">kelas: {{$user->nama_kelas?? 'kelas tidak ditemukan'}}</h2>
             </div>
         </div>
     </div>

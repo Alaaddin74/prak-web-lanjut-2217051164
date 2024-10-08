@@ -47,34 +47,37 @@ class UserController extends Controller
     // Store method to save user data
     public function store(Request $request)
     {
-        // Validate the request data before saving
-        $validatedData = $request->validate([
+        // Validasi input
+        $request->validate([
             'nama' => 'required|string|max:255',
             'npm' => 'required|string|max:255',
-            'kelas_id' => 'required|exists:kelas,id',
-        ]);
-
-        $this->userModel->create([
+            'kelas_id' => 'required|integer',
+            'foto' =>
+            'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', //Validasi untuk foto
+            ]);
+            // Meng-handle upload foto
+            if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            // Menyimpan file foto di folder 'uploads'
+            $fotoPath = $foto->move(('upload/img'), $foto);
+            } else {
+            // Jika tidak ada file yang diupload, set fotoPath menjadi null atau default
+            $fotoPath = null;
+            }
+            // Menyimpan data ke database termasuk path foto
+            $this->userModel->create([
             'nama' => $request->input('nama'),
             'npm' => $request->input('npm'),
             'kelas_id' => $request->input('kelas_id'),
+            'foto' => $fotoPath, // Menyimpan path foto
             ]);
-
-        // Create the new user record
-        // $this->userModel->create([
-        //     'nama' => $validatedData['nama'],
-        //     'npm' => $validatedData['npm'],
-        //     'kelas_id' => $validatedData['kelas_id'],
-        // ]);
-
-        // Redirect to the list of users after saving
-        return redirect()->to('/users');
+            return redirect()->to('/user')->with('success', 'User berhasil ditambahkan');
     }
 
     public function index()
     {
         // $kelas = Kelas::find(1);
-        // $user = $kelas->user();
+        // $user = $kelas->user();'
 
         // dd($user);
 
@@ -88,4 +91,17 @@ class UserController extends Controller
 
         return view('list_user', ['users' => $users]);
     }
+
+    public function show($id)
+{
+    $user = $this->userModel->getUser($id);
+
+    $data=[
+        'title'=>'Profile',
+        'user'=>$user,
+    ];
+
+    return view('profile', $data);
+}
+
 }

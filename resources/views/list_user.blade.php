@@ -7,6 +7,7 @@
           {{-- <img src="#" class="h-8" alt="Flowbite Logo" /> --}}
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">List of Users</span>
       </a>
+      <a href="{{ route('user.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-3 inline-block">Tambah Pengguna Baru</a>
     </div>
       </nav>
     {{-- <h1 >List of Users</h1> --}}
@@ -30,7 +31,10 @@
                     <td class="px-6 py-4">{{ $user->nama_kelas }}</td>
                     <td>
                         <!-- You can add actions like edit or delete here -->
-                        <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</a>  <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Delete</a>
+                        <a href="{{route('users.show', $user->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Edit</a>
+                        <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                            Delete</a>
                     </td>
                 </tr>
             @endforeach
