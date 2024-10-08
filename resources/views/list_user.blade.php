@@ -20,6 +20,7 @@
                 <th scope="col" class="px-6 py-3">NPM</th>
                 <th scope="col" class="px-6 py-3">Kelas</th>
                 <th scope="col" class="px-6 py-3">Aksi</th>
+                <th scope="col" class="px-6 py-3"></th>
             </tr>
         </thead>
         <tbody>
@@ -30,11 +31,26 @@
                     <td class="px-6 py-4">{{ $user->npm }}</td>
                     <td class="px-6 py-4">{{ $user->nama_kelas }}</td>
                     <td>
-                        <!-- You can add actions like edit or delete here -->
-                        <a href="{{route('users.show', $user->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        <!-- Details -->
+                        <a href="{{route('user.show', $user->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Details</a>
+                            <!-- Edit -->
+                        <a href="{{route('user.edit', $user['id'])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                             Edit</a>
-                        <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                            Delete</a>
+
+                    </td>
+                    <td>
+                        <!-- Delete -->
+                        <form action="{{route('user.destroy', $user['id'])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+                            onclick="return confirm('Apakah Anda Yakin ingin menghapus user ini?')">
+                            Detete
+                            </button>
+                    {{-- <a href="#" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                        Delete</a> --}}
+                    </form>
                     </td>
                 </tr>
             @endforeach

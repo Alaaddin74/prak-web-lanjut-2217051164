@@ -30,7 +30,11 @@ class UserModel extends Model
                   ->select('user.*', 'kelas.nama_kelas');
 
     if ($id != null) {
-        return $query->where('user.id', $id)->first();
+        return $this->join('kelas', 'kelas.id', '=', 'user.kelas_id')
+        ->select('user.*', 'kelas.nama_kelas')
+        ->where('user.id', $id)
+        ->first();
+
     } else {
         return $query->get();
     }
