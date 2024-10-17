@@ -109,4 +109,30 @@ class UserController extends Controller
         $title = 'Edit User';
         return view('edit_user', compact('user', 'kelas', 'title'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $user = UserModel::findOrFail($id);
+
+        $user->nama = $request->nama;
+        $user->npm = $request->npm;
+
+        $user->kelas_id = $request->kelas_id;
+
+        if ($request->hasFile('foto')) {
+            $fileName = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('upload/img'), $fileName);
+            $user->foto = "/" . 'upload/img/' . $fileName;  // Ensure correct path structure
+        }
+        $user->save();
+
+        return redirect()->route('user.list')->with('success', 'User updated successfully');
+    }
+
+    public function destroy($id)  {
+        $user = UserModel::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('user.list')->with('success', 'User updated successfully');
+    }
 }
