@@ -122,7 +122,7 @@ class UserController extends Controller
         if ($request->hasFile('foto')) {
             $fileName = time() . '.' . $request->foto->extension();
             $request->foto->move(public_path('upload/img'), $fileName);
-            $user->foto = "/" . 'upload/img/' . $fileName;  // Ensure correct path structure
+            $user->foto = "/" . 'upload/img/' . $fileName;
         }
         $user->save();
 
