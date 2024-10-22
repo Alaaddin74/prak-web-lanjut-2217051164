@@ -17,8 +17,8 @@ asset('assets') }}">
             <div class="flex flex-col space-y-3 text-center capitalize">
                 <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">name: {{$user->nama}}</h2>
 
-                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">NPM: {{$user->npm}}</h2>
-                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">kelas: {{$user->nama_kelas?? 'kelas tidak ditemukan'}}</h2>
+                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">Jurusan: {{$user->jurusan}}</h2>
+                <h2 class="px-10 py-3 rounded-lg bg-cyan-400/20">Semester: {{$user->semester?? 'kelas tidak ditemukan'}}</h2>
             </div>
             {{-- <img class="" src="{{ $user->foto }}" alt="photo profile"> --}}
 

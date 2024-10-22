@@ -135,4 +135,14 @@ class UserController extends Controller
 
         return redirect()->route('user.list')->with('success', 'User updated successfully');
     }
+
+    public function cardsView()
+{
+    // Fetch all users with their class and additional info
+    $users = $this->userModel->getUser();
+
+    // Pass the data to the view
+    return view('cards', ['kelas' => $users]);
+}
+
 }

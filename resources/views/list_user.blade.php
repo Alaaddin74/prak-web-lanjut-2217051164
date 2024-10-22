@@ -8,6 +8,7 @@
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">List of Users</span>
       </a>
       <a href="{{ route('user.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-3 inline-block">Tambah Pengguna Baru</a>
+      <a href="{{ route('user.cards') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-3 inline-block">View Cards</a>
     </div>
       </nav>
     {{-- <h1 >List of Users</h1> --}}
@@ -19,6 +20,8 @@
                 <th scope="col" class="px-6 py-3">Nama</th>
                 <th scope="col" class="px-6 py-3">NPM</th>
                 <th scope="col" class="px-6 py-3">Kelas</th>
+                <th scope="col" class="px-6 py-3">Jurusan</th>
+                <th scope="col" class="px-6 py-3">Semester</th>
                 <th scope="col" class="px-6 py-3">Aksi</th>
                 <th scope="col" class="px-6 py-3"></th>
             </tr>
@@ -30,6 +33,8 @@
                     <td class="px-6 py-4">{{ $user->nama }}</td>
                     <td class="px-6 py-4">{{ $user->npm }}</td>
                     <td class="px-6 py-4">{{ $user->nama_kelas }}</td>
+                    <td class="px-6 py-4">{{ $user->jurusan }}</td>
+                    <td class="px-6 py-4">{{ $user->semester }}</td>
                     <td>
                         <!-- Details -->
                         <a href="{{route('user.show', $user->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
